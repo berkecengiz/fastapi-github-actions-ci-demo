@@ -4,6 +4,7 @@ from app.main import app
 
 client = TestClient(app)
 
+
 class TestRootEndpoint:
     def test_read_root(self):
         response = client.get("/")
@@ -11,6 +12,7 @@ class TestRootEndpoint:
         data = response.json()
         assert data["status"] == "ok"
         assert "message" in data
+
 
 class TestHealthEndpoint:
     def test_health_check(self):
@@ -21,6 +23,7 @@ class TestHealthEndpoint:
         assert "timestamp" in data
         assert "version" in data
         assert isinstance(data["timestamp"], float)
+
 
 class TestEchoEndpoint:
     def test_echo_valid_message(self):
@@ -53,6 +56,7 @@ class TestEchoEndpoint:
         response = client.post("/echo", json={})
         assert response.status_code == 422
 
+
 class TestVersionEndpoint:
     def test_get_version(self):
         response = client.get("/version")
@@ -61,6 +65,7 @@ class TestVersionEndpoint:
         assert "version" in data
         assert "name" in data
         assert data["version"] == "1.0.0"
+
 
 class TestErrorHandling:
     def test_simulate_error(self):
@@ -74,16 +79,19 @@ class TestErrorHandling:
         response = client.get("/nonexistent")
         assert response.status_code == 404
 
+
 class TestCORS:
     def test_cors_headers(self):
         response = client.options("/")
         assert response.status_code == 200
+
 
 class TestMiddleware:
     def test_request_logging_middleware(self):
         # This test verifies the middleware doesn't break requests
         response = client.get("/")
         assert response.status_code == 200
+
 
 @pytest.mark.asyncio
 async def test_lifespan_events():
