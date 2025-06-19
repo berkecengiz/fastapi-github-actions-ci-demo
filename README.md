@@ -8,7 +8,7 @@ A production-ready FastAPI application demonstrating modern development practice
 - **Pydantic V2** for data validation and settings management
 - **Comprehensive testing** with pytest and coverage reporting
 - **GitHub Actions CI/CD** with multi-Python version testing
-- **Docker** with multi-stage builds for production deployment
+- **Docker** with optimized builds and security best practices
 - **Code quality tools** (Black, Flake8, MyPy, Bandit)
 - **Security middleware** (CORS, TrustedHost)
 - **Request logging** and error handling
