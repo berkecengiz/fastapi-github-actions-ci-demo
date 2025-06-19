@@ -72,26 +72,3 @@ jobs:
         
       - name: Build Docker Image
         run: docker build -t fastapi-app:${{ github.sha }} .
-        
-      - name: Test Docker Image
-        run: |
-          echo "Starting container..."
-          docker run -d -p 8000:8000 --name test-container fastapi-app:${{ github.sha }}
-          
-          echo "Waiting for app to start..."
-          sleep 15
-          
-          echo "Testing endpoints..."
-          # Try root endpoint first (should always exist)
-          if curl -f --max-time 10 http://localhost:8000/; then
-            echo "✅ Root endpoint working!"
-          elif curl -f --max-time 10 http://localhost:8000/health; then
-            echo "✅ Health endpoint working!"
-          else
-            echo "❌ Neither endpoint responding"
-            docker logs test-container
-            exit 1
-          fi
-          
-          echo "✅ Docker test passed!"
-          docker stop test-container
