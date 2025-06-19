@@ -82,8 +82,9 @@ class TestErrorHandling:
 
 class TestCORS:
     def test_cors_headers(self):
-        response = client.options("/")
+        response = client.get("/", headers={"Origin": "http://localhost:3000"})
         assert response.status_code == 200
+        assert "access-control-allow-origin" in response.headers
 
 
 class TestMiddleware:

@@ -53,14 +53,34 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Add security middleware
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.allowed_hosts)
+# # Add security middleware
+# app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.allowed_hosts)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=settings.allowed_origins,
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+# Add CORS middleware first
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.allowed_origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+)
+
+# Add security middleware after CORS
+app.add_middleware(
+    TrustedHostMiddleware,
+    allowed_hosts=[
+        "localhost",
+        "127.0.0.1",
+        "*.localhost",
+        "testserver",  # For TestClient
+    ],
 )
 
 

@@ -1,46 +1,38 @@
+# app/config.py - Pydantic V2 compatible
 import os
 from functools import lru_cache
 from typing import List
 
-from pydantic import BaseSettings, Field
+from pydantic import Field, ConfigDict
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    """Application settings with environment variable support"""
-
-    # App settings
-    app_name: str = Field(default="FastAPI Demo", env="APP_NAME")
-    app_version: str = Field(default="1.0.0", env="APP_VERSION")
-    debug: bool = Field(default=False, env="DEBUG")
-
-    # Server settings
-    host: str = Field(default="0.0.0.0", env="HOST")
-    port: int = Field(default=8000, env="PORT")
-    workers: int = Field(default=1, env="WORKERS")
-
-    # CORS settings
-    allowed_origins: List[str] = Field(default=["*"], env="ALLOWED_ORIGINS")
-    allowed_hosts: List[str] = Field(default=["*"], env="ALLOWED_HOSTS")
-
-    # Logging
-    log_level: str = Field(default="INFO", env="LOG_LEVEL")
-
-    # Security
-    secret_key: str = Field(
-        default="your-secret-key-change-in-production", env="SECRET_KEY"
+    # Use ConfigDict instead of class Config
+    model_config = ConfigDict(
+        env_file=".env", env_file_encoding="utf-8", case_sensitive=False, extra="ignore"
     )
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        case_sensitive = False
+    # App settings - environment variables are auto-detected by field name
+    app_name: str = Field(default="FastAPI CI Demo")
+    app_version: str = Field(default="1.0.0")
+    debug: bool = Field(default=False)
+
+    # Server settings
+    host: str = Field(default="0.0.0.0")
+    port: int = Field(default=8000)
+
+    # CORS settings
+    allowed_origins: List[str] = Field(default=["*"])
+    allowed_hosts: List[str] = Field(default=["localhost", "127.0.0.1"])
+
+    # Logging
+    log_level: str = Field(default="INFO")
 
 
 @lru_cache()
 def get_settings() -> Settings:
-    """Get cached settings instance"""
     return Settings()
 
 
-# Create settings instance
 settings = get_settings()
