@@ -1,4 +1,4 @@
-# FastAPI CI/CD Demo
+# FastAPI application with CI pipeline
 
 A production-ready FastAPI application demonstrating modern development practices with comprehensive CI/CD pipeline, testing, and containerization.
 
@@ -96,14 +96,6 @@ docker run -p 8000:8000 fastapi-ci-demo
 # Run with environment file
 docker run -p 8000:8000 --env-file .env fastapi-ci-demo
 ```
-
-### Production deployment
-
-The Dockerfile uses multi-stage builds for:
-- ✅ Smaller final image size
-- ✅ Security (non-root user)
-- ✅ Health checks
-- ✅ Optimized for production
 
 ## 🔄 CI/CD Pipeline
 
