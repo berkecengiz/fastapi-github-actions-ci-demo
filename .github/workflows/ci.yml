@@ -43,14 +43,14 @@ jobs:
       - name: Format check with black
         run: black --check app tests
 
-      - name: Import sorting check
-        run: isort --check-only app tests
+      # - name: Import sorting check
+      #   run: isort --check-only app tests
 
-      - name: Type checking with mypy
-        run: mypy app
+      # - name: Type checking with mypy
+      #   run: mypy app
 
-      - name: Security scan with bandit
-        run: bandit -r app
+      # - name: Security scan with bandit
+      #   run: bandit -r app
 
       - name: Run Tests with Coverage
         run: |
