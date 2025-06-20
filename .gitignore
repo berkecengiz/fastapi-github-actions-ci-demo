@@ -4,3 +4,8 @@ __pycache__/
 *.log
 /venv
 /.pytest_cache
+
+# Coverage reports
+.coverage
+htmlcov/
+coverage.xml
