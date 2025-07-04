@@ -53,17 +53,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# # Add security middleware
-# app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.allowed_hosts)
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=settings.allowed_origins,
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
-
-# Add CORS middleware first
+# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
