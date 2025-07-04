@@ -5,7 +5,7 @@
 # Python image that includes build tools. The artifacts from this stage will be
 # copied to the final, smaller production stage.
 # ====================================================================================
-FROM python:3.9-slim-bullseye AS builder
+FROM python:3.11-slim-bullseye AS builder
 
 # Set the working directory
 WORKDIR /usr/src/app
@@ -15,9 +15,6 @@ WORKDIR /usr/src/app
 # PYTHONUNBUFFERED: Prevents python from buffering stdout and stderr.
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-
-# Install system dependencies required for some Python packages if needed
-# RUN apt-get update && apt-get install -y --no-install-recommends gcc
 
 # Copy only the requirements file to leverage Docker cache
 COPY requirements.txt .
@@ -34,7 +31,7 @@ RUN pip install --no-cache-dir --user -r requirements.txt
 # slim Python image to keep the size down. It also creates a non-root user
 # to run the application for better security.
 # ====================================================================================
-FROM python:3.9-slim-bullseye
+FROM python:3.11-slim-bullseye
 
 # Set the working directory
 WORKDIR /usr/src/app
@@ -47,18 +44,19 @@ ENV PYTHONUNBUFFERED 1
 # This is a critical security best practice to avoid running as root.
 RUN addgroup --system app && adduser --system --group app
 
+# Install curl for the HEALTHCHECK and clean up apt cache
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy installed packages from the builder stage
-# This copies the installed dependencies from the builder's user directory.
 COPY --from=builder /root/.local /home/app/.local
 
-# Copy the application code into the container
-COPY ./app ./app
+# Copy the application code into the container and set ownership
+# Using --chown is more efficient than a separate RUN chown command.
+COPY --chown=app:app ./app ./app
 
 # Set the PATH environment variable to include the installed packages
 ENV PATH=/home/app/.local/bin:$PATH
-
-# Change ownership of the app directory to the new user
-RUN chown -R app:app /usr/src/app
 
 # Switch to the non-root user
 USER app
