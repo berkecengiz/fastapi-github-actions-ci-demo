@@ -5,6 +5,7 @@ from app.main import app
 
 client = TestClient(app)
 
+
 class TestEchoAPI:
     def test_echo_success(self):
         payload = {"message": "Hello, World!"}
@@ -28,5 +29,5 @@ class TestEchoAPI:
             in response_json["detail"][0]["msg"]
         )
 
-# You can keep the health check test in a separate file like tests/test_main.py
 
+# You can keep the health check test in a separate file like tests/test_main.py

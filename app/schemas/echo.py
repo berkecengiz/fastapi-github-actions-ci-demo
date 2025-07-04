@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field, field_validator
 
+
 class EchoRequest(BaseModel):
     message: str = Field(..., min_length=1, description="Message to be echoed")
 
@@ -10,6 +11,7 @@ class EchoRequest(BaseModel):
         if not v.strip():
             raise ValueError("Message cannot be empty or contain only whitespace")
         return v
+
 
 class EchoResponse(BaseModel):
     message: str

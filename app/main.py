@@ -1,11 +1,12 @@
 import logging
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette import status
 
-from app.core.config import Settings
 from app.api.v1.api import api_router
+from app.core.config import Settings
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -30,6 +31,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # Exception handler for a generic error
 @app.exception_handler(Exception)
 async def generic_exception_handler(request: Request, exc: Exception):
@@ -42,11 +44,13 @@ async def generic_exception_handler(request: Request, exc: Exception):
         },
     )
 
+
 # API Endpoints
 @app.get("/", summary="Health check endpoint")
 async def health_check():
     """Simple health check endpoint to confirm the service is running."""
     return {"status": "ok"}
+
 
 # Include the main API router
 app.include_router(api_router)
