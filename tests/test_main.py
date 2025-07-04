@@ -45,7 +45,7 @@ class TestEchoEndpoint:
         payload = {"message": "   "}
         response = client.post("/echo", json=payload)
         assert response.status_code == 400
-        assert "cannot be empty" in response.json()["detail"][0]["msg"]
+        assert "cannot be empty" in response.json()["error"]["message"]
 
     def test_echo_long_message(self):
         long_message = "a" * 501  # Exceeds max_length
