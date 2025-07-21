@@ -1,4 +1,4 @@
-# Production-Ready FastAPI Starter with CI/CD
+# FastAPI Starter with CI/CD
 
 [![CI Pipeline](https://github.com/berkecengiz/fastapi-github-actions-ci-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/berkecengiz/fastapi-github-actions-ci-demo/actions/workflows/ci.yml)
 [![Code Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://github.com/berkecengiz/fastapi-github-actions-ci-demo/actions/workflows/ci.yml)
