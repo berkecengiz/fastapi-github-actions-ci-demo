@@ -6,7 +6,7 @@
 
 This repository serves as a robust, production-ready starter template for building high-performance APIs with FastAPI. It comes pre-configured with a comprehensive CI/CD pipeline, automated testing, code quality checks, and Docker support to ensure your application is reliable, maintainable, and scalable from day one.
 
-## ✨ Features
+## Features
 
 * **Modern API Framework**: Built with **FastAPI** for high performance and asynchronous capabilities.
 * **Modular Architecture**: Organized using API Routers for a clean and scalable structure.
@@ -23,7 +23,7 @@ This repository serves as a robust, production-ready starter template for buildi
 * **Dependency Management**: Simple and effective dependency management using `requirements.txt`.
 * **Centralized Configuration**: Easy and secure configuration management using environment variables and `pydantic-settings`.
 
-## 📂 Project Structure
+## Project Structure
 
 The project follows a modular structure to promote separation of concerns and scalability.
 
@@ -57,7 +57,7 @@ The project follows a modular structure to promote separation of concerns and sc
 └── Dockerfile
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 Follow these instructions to get the project up and running on your local machine.
 
@@ -116,7 +116,7 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 The `--reload` flag will automatically restart the server whenever you make changes to the code.
 
-## 🐳 Running with Docker
+## Running with Docker
 
 You can also build and run the application using Docker for a more isolated environment.
 
@@ -134,7 +134,7 @@ docker run -d -p 8000:8000 --name my-fastapi-app fastapi-starter
 
 The application will be available at `http://localhost:8000`.
 
-## 🧪 Testing
+## Testing
 
 This project uses `pytest` for testing.
 
@@ -156,7 +156,7 @@ pytest tests/ --cov=app --cov-report=html
 
 You can then open `htmlcov/index.html` in your browser.
 
-## 🎨 Code Quality
+## Code Quality
 
 This starter kit is equipped with several tools to ensure your code stays clean, consistent, and secure.
 
@@ -177,7 +177,7 @@ mypy .
 bandit -r .
 ```
 
-## ⚙️ CI/CD Pipeline
+## CI/CD Pipeline
 
 The GitHub Actions workflow in `.github/workflows/ci.yml` automates the quality assurance process. It is triggered on every `push` and `pull_request` to the `main` branch and performs the following jobs:
 
@@ -186,23 +186,9 @@ The GitHub Actions workflow in `.github/workflows/ci.yml` automates the quality 
 3.  **Run Tests**: Executes the entire `pytest` suite across multiple Python versions to ensure compatibility. It also uploads the coverage report.
 4.  **Build Docker Image**: Builds the production Docker image to ensure the `Dockerfile` is working correctly.
 
-## 📚 API Documentation
+## API Documentation
 
 Once the application is running, FastAPI provides automatic, interactive API documentation. Note that all endpoints are now prefixed with `/v1`.
 
 * **Swagger UI**: `http://localhost:8000/docs`
 * **ReDoc**: `http://localhost:8000/redoc`
-
-## 🤝 Contributing
-
-Contributions are welcome! If you have suggestions for improvements, please open an issue or create a pull request.
-
-1.  Fork the repository.
-2.  Create a new feature branch (`git checkout -b feature/amazing-feature`).
-3.  Commit your changes (`git commit -m 'Add some amazing feature'`).
-4.  Push to the branch (`git push origin feature/amazing-feature`).
-5.  Open a pull request.
-
-## 📄 License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
